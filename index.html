@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AlphaNet | Hackworth OptimaShort — Privacy Coin Crisis Report (Jun 4–5, 2026)</title>
+<meta property="og:title" content="AlphaNet | Hackworth OptimaShort — Privacy Coin Crisis Report (Jun 4–5, 2026)">
+<meta property="og:description" content="ZEC −56% / XMR −11.1% — How Hackworth OptimaShort navigated the Orchard vulnerability crisis across 52 trades over 2 days.">
+<meta property="og:image" content="https://alphanet.global/assets/logo-Bx0-plbv.webp">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+
+    :root {
+        --bg: #000000;
+        --bg-panel: #0a0a0a;
+        --bg-elevated: #111111;
+        --border: #222222;
+        --border-light: #333333;
+        --text: #e8e8e8;
+        --text-secondary: #999999;
+        --text-tertiary: #666666;
+        --accent-blue: #2979ff;
+        --accent-yellow: #ffb300;
+        --accent-green: #00c853;
+        --accent-red: #ff1744;
+        --accent-orange: #FFA500;
+        --font-mono: 'SF Mono', 'Fira Code', 'Consolas', 'Monaco', monospace;
+        --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    }
+
+    body {
+        font-family: var(--font-sans);
+        background: var(--bg);
+        color: var(--text);
+        line-height:1.6;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    .container { max-width:960px; margin:0 auto; padding:0 24px; }
+
+    /* Top Bar */
+    .top-bar {
+        background: var(--bg-panel);
+        border-bottom:1px solid var(--border);
+        padding:12px 0;
+        position:sticky; top:0; z-index:100;
+    }
+    .top-bar-inner {
+        display:flex; justify-content:space-between; align-items:center;
+        max-width:960px; margin:0 auto; padding:0 24px;
+    }
+    .top-bar-brand { display:flex; align-items:center; gap:10px; }
+    .top-bar-brand svg { height:22px; }
+    .top-bar-meta {
+        font-family:var(--font-mono); font-size:11px;
+        color:var(--text-tertiary); letter-spacing:1px;
+    }
+
+    /* Hero */
+    .hero {
+        padding:64px 0 48px;
+        border-bottom:1px solid var(--border);
+    }
+    .hero-label {
+        font-family:var(--font-mono); font-size:10px;
+        font-weight:600; color:var(--accent-red);
+        letter-spacing:3px; text-transform:uppercase; margin-bottom:16px;
+    }
+    .hero h1 {
+        font-size:36px; font-weight:700; line-height:1.2;
+        margin-bottom:12px; letter-spacing:-0.5px;
+    }
+    .hero h1 span { color:var(--accent-blue); }
+    .hero-subtitle {
+        font-size:15px; color:var(--text-secondary);
+        max-width:680px; line-height:1.65;
+    }
+
+    /* Summary strip */
+    .summary-strip {
+        display:flex; gap:24px; flex-wrap:wrap;
+        padding:32px 0 0;
+    }
+    .summary-item { flex:1; min-width:140px; }
+    .summary-item .label {
+        font-family:var(--font-mono); font-size:10px;
+        color:var(--text-tertiary); letter-spacing:1px;
+        text-transform:uppercase; margin-bottom:4px;
+    }
+    .summary-item .value {
+        font-family:var(--font-mono); font-size:22px; font-weight:600;
+    }
+
+    /* Sections */
+    section { margin-bottom:48px; padding-top:28px; }
+    .section-num {
+        font-family:var(--font-mono); font-size:10px;
+        font-weight:600; letter-spacing:2px;
+        text-transform:uppercase; color:var(--accent-blue); margin-bottom:8px;
+    }
+    .section-title {
+        font-size:18px; font-weight:600; color:var(--text);
+        letter-spacing:-0.3px; margin-bottom:24px;
+    }
+
+    /* Cards */
+    .card-grid {
+        display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+        gap:16px;
+    }
+    .card {
+        background:var(--bg-panel); border:1px solid var(--border);
+        padding:24px; transition:background 0.15s;
+    }
+    .card:hover { background:var(--bg-elevated); }
+    .card-header {
+        font-family:var(--font-mono); font-size:12px;
+        font-weight:600; letter-spacing:1px;
+        color:var(--text-secondary); margin-bottom:12px;
+    }
+    .card-value {
+        font-family:var(--font-mono); font-size:32px;
+        font-weight:700; margin-bottom:4px;
+    }
+    .card-value.positive { color:var(--accent-green); }
+    .card-value.negative { color:var(--accent-red); }
+    .card-value.neutral { color:var(--text); }
+    .card-sub { font-size:13px; color:var(--text-tertiary); }
+
+    /* Table */
+    .data-table {
+        width:100%; border-collapse:collapse;
+        font-family:var(--font-mono); font-size:12px;
+    }
+    .data-table thead th {
+        text-align:left; padding:12px 14px;
+        border-bottom:1px solid var(--border-light);
+        border-top:1px solid var(--border);
+        color:var(--text-tertiary); font-weight:600;
+        letter-spacing:1px; font-size:10px; text-transform:uppercase;
+        background:var(--bg-panel);
+    }
+    .data-table tbody td {
+        padding:12px 14px; border-bottom:1px solid var(--border);
+        color:var(--text-secondary);
+    }
+    .data-table tbody tr:hover td { background:var(--bg-panel); color:var(--text); }
+    .data-table .highlight { color:var(--accent-green); font-weight:600; }
+    .data-table .warning { color:var(--accent-red); font-weight:600; }
+    .data-table .neutral { color:var(--accent-yellow); }
+
+    /* Insight blocks */
+    .insight-block {
+        background:var(--bg-panel);
+        border-left:2px solid var(--accent-blue);
+        padding:20px 24px; margin-bottom:16px;
+    }
+    .insight-block.red { border-left-color:var(--accent-red); }
+    .insight-block.green { border-left-color:var(--accent-green); }
+    .insight-block.orange { border-left-color:var(--accent-orange); }
+    .insight-label {
+        font-family:var(--font-mono); font-size:10px;
+        font-weight:600; text-transform:uppercase;
+        letter-spacing:1.5px; margin-bottom:8px;
+    }
+    .insight-label.good { color:var(--accent-green); }
+    .insight-label.bad { color:var(--accent-red); }
+    .insight-label.obs { color:var(--accent-blue); }
+    .insight-label.warn-label { color:var(--accent-orange); }
+    .insight-text { font-size:14px; line-height:1.7; color:var(--text-secondary); }
+    .insight-text strong { color:var(--text); }
+
+    /* Timeline */
+    .timeline {
+        display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+        gap:16px; position:relative;
+    }
+    .timeline-card {
+        background:var(--bg-panel); border:1px solid var(--border);
+        padding:20px; position:relative;
+    }
+    .timeline-card .tl-time {
+        font-family:var(--font-mono); font-size:10px;
+        color:var(--text-tertiary); letter-spacing:1px;
+        text-transform:uppercase; margin-bottom:10px;
+    }
+    .timeline-card h4 {
+        font-size:14px; font-weight:600; color:var(--text);
+        margin-bottom:8px;
+    }
+    .timeline-card p {
+        font-size:12px; color:var(--text-tertiary); line-height:1.6;
+    }
+    .tl-dot {
+        display:inline-block; width:6px; height:6px;
+        border-radius:50%; margin-right:8px; vertical-align:middle;
+    }
+    .tl-dot.red { background:var(--accent-red); }
+    .tl-dot.orange { background:var(--accent-orange); }
+    .tl-dot.yellow { background:var(--accent-yellow); }
+
+    /* Dual panel */
+    .dual-panel {
+        display:grid; grid-template-columns:1fr 1fr; gap:16px;
+    }
+    .panel {
+        background:var(--bg-panel); border:1px solid var(--border);
+        padding:24px;
+    }
+    .panel-header {
+        font-family:var(--font-mono); font-size:11px;
+        font-weight:600; letter-spacing:1.5px;
+        text-transform:uppercase; margin-bottom:16px;
+    }
+    .panel-header.zec { color:var(--accent-yellow); }
+    .panel-header.xmr { color:var(--accent-orange); }
+
+    /* PnL rows */
+    .pnl-row {
+        display:flex; justify-content:space-between; align-items:center;
+        padding:10px 0; border-bottom:1px solid var(--border);
+        font-family:var(--font-mono); font-size:12px;
+    }
+    .pnl-row:last-child { border-bottom:none; }
+    .pnl-l { color:var(--text-secondary); }
+    .pnl-r { font-weight:600; }
+    .pnl-r.profit { color:var(--accent-green); }
+    .pnl-r.flat { color:var(--text-secondary); }
+
+    /* Scenario boxes */
+    .scenario-row {
+        display:flex; gap:12px; margin-top:16px;
+    }
+    .scenario-box {
+        flex:1; background:rgba(255,255,255,0.02);
+        border:1px solid var(--border); border-radius:4px;
+        padding:12px; text-align:center;
+    }
+    .scenario-box .sc-label {
+        font-family:var(--font-mono); font-size:10px;
+        color:var(--text-tertiary); text-transform:uppercase;
+        letter-spacing:0.5px; margin-bottom:4px;
+    }
+    .scenario-box .sc-val {
+        font-family:var(--font-mono); font-size:18px;
+        font-weight:700; color:var(--accent-green);
+    }
+
+    /* Trade stat row */
+    .trade-stats {
+        display:flex; gap:16px; margin-bottom:20px;
+    }
+    .trade-stat {
+        flex:1; text-align:center;
+        background:rgba(255,255,255,0.02);
+        border:1px solid var(--border); border-radius:4px;
+        padding:14px 8px;
+    }
+    .trade-stat .ts-val {
+        font-family:var(--font-mono); font-size:20px;
+        font-weight:700;
+    }
+    .trade-stat .ts-label {
+        font-family:var(--font-mono); font-size:9px;
+        color:var(--text-tertiary); text-transform:uppercase;
+        letter-spacing:1px; margin-top:4px;
+    }
+    .ts-val.green { color:var(--accent-green); }
+    .ts-val.yellow { color:var(--accent-yellow); }
+    .ts-val.blue { color:var(--accent-blue); }
+
+    /* Narratives */
+    .narrative-grid {
+        display:grid; grid-template-columns:1fr 1fr; gap:24px;
+    }
+    .narrative-block { background:var(--bg-panel); border:1px solid var(--border); padding:24px; }
+    .narrative-block h4 {
+        font-size:14px; font-weight:600; color:var(--text);
+        margin-bottom:12px; display:flex; align-items:center; gap:8px;
+    }
+    .narrative-block h4 .icon {
+        font-family:var(--font-mono); font-size:11px; font-weight:700;
+        padding:3px 8px; border-radius:3px;
+    }
+    .narrative-block h4 .icon.zec-icon { background:rgba(255,179,0,0.15); color:var(--accent-yellow); }
+    .narrative-block h4 .icon.xmr-icon { background:rgba(255,165,0,0.15); color:var(--accent-orange); }
+    .narrative-block p { font-size:13px; color:var(--text-secondary); line-height:1.8; }
+    .narrative-block .tag {
+        display:inline-block; font-family:var(--font-mono); font-size:10px;
+        font-weight:600; padding:2px 8px; border-radius:3px;
+        letter-spacing:0.5px; margin:0 2px;
+    }
+    .tag.green { background:rgba(0,200,83,0.12); color:var(--accent-green); }
+    .tag.amber { background:rgba(255,179,0,0.12); color:var(--accent-yellow); }
+    .tag.red { background:rgba(255,23,68,0.12); color:var(--accent-red); }
+
+    /* Bar viz */
+    .viz-block { margin-top:32px; }
+    .viz-row {
+        display:flex; align-items:center; gap:16px;
+        margin-bottom:12px;
+    }
+    .viz-label {
+        font-family:var(--font-mono); font-size:11px; font-weight:600;
+        min-width:80px;
+    }
+    .viz-label.zec { color:var(--accent-yellow); }
+    .viz-label.xmr { color:var(--accent-orange); }
+    .viz-track {
+        flex:1; height:24px; background:rgba(255,255,255,0.03);
+        border-radius:3px; overflow:hidden; position:relative;
+        border:1px solid var(--border);
+    }
+    .viz-fill {
+        height:100%; border-radius:3px;
+        font-family:var(--font-mono); font-size:9px;
+        display:flex; align-items:center; padding-left:8px;
+        font-weight:600;
+    }
+    .viz-fill.zec-fill {
+        background:linear-gradient(90deg,rgba(255,179,0,0.25),rgba(255,179,0,0.08));
+        color:var(--accent-yellow); border:1px solid rgba(255,179,0,0.2);
+    }
+    .viz-fill.xmr-fill {
+        background:linear-gradient(90deg,rgba(255,165,0,0.25),rgba(255,165,0,0.08));
+        color:var(--accent-orange); border:1px solid rgba(255,165,0,0.2);
+    }
+    .viz-val {
+        font-family:var(--font-mono); font-size:13px; font-weight:700;
+        min-width:70px; text-align:right;
+    }
+    .viz-val.down { color:var(--accent-red); }
+
+    /* Footer */
+    .footer {
+        padding:64px 0 72px; color:var(--text-tertiary);
+        font-family:var(--font-sans); font-size:13px; line-height:1.7;
+        border-top:1px solid var(--border-light);
+    }
+    .footer .container { text-align:left; }
+    .footer-brand {
+        font-family:var(--font-sans); font-size:20px;
+        font-weight:600; color:var(--text); margin-bottom:20px;
+    }
+    .footer-nav {
+        display:flex; gap:48px;
+        margin-bottom:28px;
+    }
+    .footer-nav a {
+        color:var(--text-secondary); text-decoration:none;
+        font-size:14px; transition:color 0.2s;
+    }
+    .footer-nav a:hover { color:var(--text); }
+    .footer-disclaimer {
+        font-size:12px; line-height:1.8;
+    }
+
+    @media (max-width:768px) {
+        .dual-panel, .narrative-grid { grid-template-columns:1fr; }
+        .hero h1 { font-size:24px; }
+        .card-grid { grid-template-columns:1fr; }
+        .timeline { grid-template-columns:1fr; }
+        .trade-stats { flex-wrap:wrap; }
+        .scenario-row { flex-direction:column; }
+        .summary-strip { gap:16px; }
+    }
+</style>
+</head>
+<body>
+
+<!-- Top Bar -->
+<div class="top-bar">
+    <div class="top-bar-inner">
+        <div class="top-bar-brand">
+            <img src="https://alphanet.global/assets/logo-Bx0-plbv.webp" alt="AlphaNet" style="height:22px;vertical-align:middle;">
+        </div>
+        <div class="top-bar-meta">JUNE 06, 2026 // SPECIAL REPORT</div>
+    </div>
+</div>
+
+<div class="container">
+
+<!-- Hero -->
+<div class="hero">
+    <div class="hero-label">Market Event Analysis</div>
+    <h1>Hackworth OptimaShort<br><span>Privacy Coin Crisis Response</span></h1>
+    <p class="hero-subtitle">
+        On June 4–5, 2026, a critical vulnerability in Zcash's Orchard shielded pool triggered the most severe privacy-sector selloff in two years.
+        This report breaks down how <strong>Hackworth OptimaShort</strong> navigated the cascade across ZEC (−56%) and XMR (−11.1%),
+        turning systemic panic into net-positive PnL on both pairs.
+    </p>
+    <div class="summary-strip">
+        <div class="summary-item">
+            <div class="label">Period</div>
+            <div class="value" style="color:var(--text);">Jun 4–5</div>
+        </div>
+        <div class="summary-item">
+            <div class="label">Strategies</div>
+            <div class="value" style="color:var(--accent-blue);">2 pairs</div>
+        </div>
+        <div class="summary-item">
+            <div class="label">Total Trades</div>
+            <div class="value" style="color:var(--text);">52</div>
+        </div>
+        <div class="summary-item">
+            <div class="label">ZEC Max DD</div>
+            <div class="value" style="color:var(--accent-red);">−56.0%</div>
+        </div>
+        <div class="summary-item">
+            <div class="label">Net Outcome</div>
+            <div class="value" style="color:var(--accent-green);">Positive</div>
+        </div>
+    </div>
+</div>
+
+
+<!-- 00 // THE CRISIS -->
+<section>
+    <div class="section-num">00 // THE CRISIS</div>
+    <h2 class="section-title">Two Days of Privacy-Sector Contagion</h2>
+
+    <div class="timeline">
+        <div class="timeline-card">
+            <div class="tl-dot red"></div>
+            <span class="tl-time">JUN 4 · 09:00 UTC</span>
+            <h4>ZEC Vulnerability Disclosure</h4>
+            <p>Orchard shielded pool critical bug revealed. Immediate repricing begins. ZEC plunges from ~$1,100 toward $500 as confidence in privacy infrastructure collapses.</p>
+        </div>
+        <div class="timeline-card">
+            <div class="tl-dot orange"></div>
+            <span class="tl-time">JUN 4 · 14:00 UTC</span>
+            <h4>Panic Cascade</h4>
+            <p>Fear spreads to Monero and broader privacy sector. Leveraged longs liquidated across the board. Liquidity evaporates, amplifying every move.</p>
+        </div>
+        <div class="timeline-card">
+            <div class="tl-dot yellow"></div>
+            <span class="tl-time">JUN 4–5</span>
+            <h4>BTC Macro Drag</h4>
+            <p>Bitcoin slides from ~$66K to below $61K. Macro headwinds compound the privacy-sector rout, deepening altcoin losses market-wide.</p>
+        </div>
+    </div>
+
+    <!-- Price strips -->
+    <div style="margin-top:32px;">
+        <div class="viz-row">
+            <span class="viz-label zec">ZEC</span>
+            <div class="viz-track">
+                <div class="viz-fill zec-fill" style="width:100%;">−56.0% max drawdown</div>
+            </div>
+            <span class="viz-val down">−56.0%</span>
+        </div>
+        <div class="viz-row">
+            <span class="viz-label xmr">XMR</span>
+            <div class="viz-track">
+                <div class="viz-fill xmr-fill" style="width:19.8%;">−11.1% contagion</div>
+            </div>
+            <span class="viz-val down">−11.1%</span>
+        </div>
+        <div class="viz-row">
+            <span class="viz-label" style="color:var(--accent-orange);">BTC</span>
+            <div class="viz-track">
+                <div class="viz-fill xmr-fill" style="width:7.5%;background:linear-gradient(90deg,rgba(255,165,0,0.2),rgba(255,165,0,0.06%);color:var(--accent-orange);border-color:rgba(255,165,0,0.15%);">$66K → $61K</div>
+            </div>
+            <span class="viz-val down">~−7.5%</span>
+        </div>
+    </div>
+</section>
+
+
+<!-- 01 // PERFORMANCE -->
+<section>
+    <div class="section-num">01 // PERFORMANCE</div>
+    <h2 class="section-title">Strategy Performance Scorecard</h2>
+
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>PAIR</th>
+                <th>JUNE PNL</th>
+                <th>TRADES</th>
+                <th>LONG / SHORT</th>
+                <th>OPEN POS</th>
+                <th>UNREALIZED</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong style="color:var(--accent-yellow);">PERP_ZEC_USDC</strong></td>
+                <td class="highlight">Net Positive</td>
+                <td>42</td>
+                <td>— / 1 open</td>
+                <td>1 Short</td>
+                <td class="highlight">+39~49%</td>
+            </tr>
+            <tr>
+                <td><strong style="color:var(--accent-orange);">PERP_XMR_USDC</strong></td>
+                <td class="highlight">+0.64%</td>
+                <td>10</td>
+                <td>All closed</td>
+                <td>—</td>
+                <td class="highlight">Realized</td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+
+<!-- 02 // ZEC DEEP DIVE -->
+<section>
+    <div class="section-num">02 // DEEP DIVE — ZEC</div>
+    <h2 class="section-title">Asymmetric Bet: Many Probes, One Decisive Win</h2>
+
+    <div class="dual-panel">
+        <div class="panel">
+            <div class="panel-header zec">PERP_ZEC_USDC · 42 TRADES</div>
+            <div class="trade-stats">
+                <div class="trade-stat">
+                    <div class="ts-val yellow">42</div>
+                    <div class="ts-label">Total Trades</div>
+                </div>
+                <div class="trade-stat">
+                    <div class="ts-val yellow">1</div>
+                    <div class="ts-label">Open Short</div>
+                </div>
+                <div class="trade-stat">
+                    <div class="ts-val green">Profit</div>
+                    <div class="ts-label">Net Outcome</div>
+                </div>
+            </div>
+            <div class="pnl-row">
+                <span class="pnl-l">Closed Trades (majority)</span>
+                <span class="pnl-r flat">Small losses</span>
+            </div>
+            <div class="pnl-row">
+                <span class="pnl-l">Open Short PnL</span>
+                <span class="pnl-r profit">Unrealized gain</span>
+            </div>
+
+            <div class="scenario-row">
+                <div class="scenario-box">
+                    <div class="sc-label">Exit @ $320</div>
+                    <div class="sc-val">+39.44%</div>
+                </div>
+                <div class="scenario-box">
+                    <div class="sc-label">Exit @ $268</div>
+                    <div class="sc-val">+49.28%</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-header zec">NARRATIVE</div>
+            <p style="font-size:13px;color:var(--text-secondary);line-height:1.8;">
+                ZEC was the <span class="tag amber">epicenter</span> of the crisis.
+                The strategy fired <strong>42 signals</strong> into extreme volatility.
+                Most closed trades were <span class="tag red">small losers</span> — probing, getting stopped, probing again.
+                But the discipline paid off: a single well-timed <span class="tag green">open short</span> captured the macro trend,
+                converting a sea of micro-losses into a commanding unrealized gain.
+            </p>
+            <p style="font-size:12px;color:var(--text-tertiary);margin-top:12px;line-height:1.7;">
+                This is trend-following in a crisis: many small probes, one decisive bet. The math works because the winner is large enough to cover all the losses and then some.
+            </p>
+        </div>
+    </div>
+</section>
+
+
+<!-- 03 // XMR DEEP DIVE -->
+<section>
+    <div class="section-num">03 // DEEP DIVE — XMR</div>
+    <h2 class="section-title">Steady Hand: Clean Execution, No Drama</h2>
+
+    <div class="dual-panel">
+        <div class="panel">
+            <div class="panel-header xmr">PERP_XMR_USDC · 10 TRADES</div>
+            <div class="trade-stats">
+                <div class="trade-stat">
+                    <div class="ts-val orange">10</div>
+                    <div class="ts-label">Total Trades</div>
+                </div>
+                <div class="trade-stat">
+                    <div class="ts-val green">10/10</div>
+                    <div class="ts-label">All Closed</div>
+                </div>
+                <div class="trade-stat">
+                    <div class="ts-val green">+0.64%</div>
+                    <div class="ts-label">Realized PnL</div>
+                </div>
+            </div>
+            <div class="pnl-row">
+                <span class="pnl-l">Execution Style</span>
+                <span class="pnl-r profit">Consistent</span>
+            </div>
+            <div class="pnl-row">
+                <span class="pnl-l">Risk Profile</span>
+                <span class="pnl-r profit">Controlled</span>
+            </div>
+            <div class="pnl-row">
+                <span class="pnl-l">Open Positions</span>
+                <span class="pnl-r flat">None — all closed</span>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-header xmr">NARRATIVE</div>
+            <p style="font-size:13px;color:var(--text-secondary);line-height:1.8;">
+                XMR was the <span class="tag amber">contagion play</span> — down a material 11.1%, but nowhere near ZEC's carnage.
+                The strategy deployed <strong>10 clean trades</strong>, fully closed, producing a
+                <span class="tag green">+0.64% realized return</span>.
+                No drama, no hanging positions — just methodical short-side execution capturing the sector-wide repricing.
+            </p>
+            <p style="font-size:12px;color:var(--text-tertiary);margin-top:12px;line-height:1.7;">
+                Consistency over heroics. Every trade closed, every basis point earned. In a market defined by panic, this was quiet, profitable composure.
+            </p>
+        </div>
+    </div>
+</section>
+
+
+<!-- 04 // ANALYSIS -->
+<section>
+    <div class="section-num">04 // ANALYSIS</div>
+    <h2 class="section-title">How OptimaShort Handled the Crisis</h2>
+
+    <div class="insight-block green">
+        <div class="insight-label good">STRENGTH</div>
+        <div class="insight-text">
+            <strong>Asymmetric Payoff Architecture.</strong> ZEC's 42-trade sequence is a textbook trend-following payoff: many small losses, one large winner. The open short's +39~49% unrealized gain more than offsets all closed losses. The strategy doesn't need to be right most of the time — it needs to let winners run.
+        </div>
+    </div>
+
+    <div class="insight-block">
+        <div class="insight-label obs">STRENGTH</div>
+        <div class="insight-text">
+            <strong>Disciplined Position Sizing on XMR.</strong> With only 10 trades and all positions closed, XMR shows the strategy's ability to operate with precision when the signal is clearer. No overtrading, no revenge entries — just +0.64% realized, clean.
+        </div>
+    </div>
+
+    <div class="insight-block orange">
+        <div class="insight-label warn-label">OBSERVATION</div>
+        <div class="insight-text">
+            <strong>ZEC's Open Short Is the Key Variable.</strong> The unrealized PnL depends entirely on exit price. At $320 the gain is +39.44%; at $268 it jumps to +49.28%. The strategy's job now is execution: <strong>let the trend run, but take profits on time</strong>. A 49% gain unrealized is meaningless if given back.
+        </div>
+    </div>
+
+    <div class="insight-block red">
+        <div class="insight-label bad">WEAKNESS</div>
+        <div class="insight-text">
+            <strong>Micro-Loss Accumulation on ZEC.</strong> 42 trades in 2 days means ~21 trades/day — many of them small closed losses. In a normal market this is fine; in a crisis, transaction costs and slippage on the losing probes can add up. A minimum hold period or cooldown filter could reduce the noise.
+        </div>
+    </div>
+</section>
+
+
+<!-- 05 // VERDICT -->
+<section>
+    <div class="section-num">05 // VERDICT</div>
+    <h2 class="section-title">Strategic Assessment</h2>
+
+    <div class="narrative-grid">
+        <div class="narrative-block">
+            <h4><span class="icon zec-icon">Z</span> ZEC · The Asymmetric Bet</h4>
+            <p>
+                Most trades were small losers. The <span class="tag red">short cover</span> — once closed — flips the entire PnL positive.
+                This is the essence of trend-following in a crisis: <span class="tag amber">absorb small losses to catch the big move</span>.
+                The open short is the payoff. How it's closed determines whether this is a good trade or a great one.
+            </p>
+        </div>
+        <div class="narrative-block">
+            <h4><span class="icon xmr-icon">M</span> XMR · The Steady Hand</h4>
+            <p>
+                All 10 trades closed. <span class="tag green">+0.64% realized</span>.
+                No drama, no hanging positions. In a market where most participants were scrambling to exit,
+                this was <span class="tag green">quiet, profitable composure</span>.
+                XMR proves the strategy can also play the steady hand when the setup calls for it.
+            </p>
+        </div>
+    </div>
+
+    <div style="margin-top:32px;background:var(--bg-panel);border:1px solid var(--border);padding:24px;">
+        <div class="insight-label good" style="margin-bottom:12px;">BOTTOM LINE</div>
+        <p style="font-size:14px;color:var(--text-secondary);line-height:1.8;max-width:800px;">
+            The June 4–5 privacy coin crisis was a textbook stress test. ZEC's 56% drawdown could have been catastrophic — instead,
+            <strong style="color:var(--accent-green);">Hackworth OptimaShort converted the chaos into net profitability on both pairs</strong>.
+            On ZEC, it was the classic trend-follower's tradeoff: absorb small losses to catch the big move. On XMR, it was clean,
+            disciplined short-side capture — no positions hanging, no surprises. <strong style="color:var(--text);">In a market defined by panic, the strategy stayed mechanical and delivered.</strong>
+        </p>
+    </div>
+</section>
+
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-brand">AlphaNet</div>
+        <nav class="footer-nav">
+            <a href="https://trade.alphanet.global/strategies">Strategy Marketplace</a>
+            <a href="https://hs.alphanet.global">Hackworth Series</a>
+            <a href="https://wp.alphanet.global">Whitepaper</a>
+        </nav>
+        <div class="footer-disclaimer">
+Data as of June 5, 2026. This update provides a snapshot of selected strategy performance and engine architecture for reference only and does not constitute investment advice. Cryptocurrency trading involves significant risk, and past performance does not guarantee future results.
+        </div>
+    </div>
+</footer>
+
+</div>
+</body>
+</html>
